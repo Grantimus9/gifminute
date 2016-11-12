@@ -17,7 +17,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'bootstrap', '~> 4.0.0.alpha3.1'
 gem 'jbuilder', '~> 2.0' # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'omniauth', '~> 1.0'
-gem 'omniauth-facebook'
+gem 'omniauth-twitter'
 gem 'figaro' # puts env variables in config/application.yml
 gem 'roadie-rails' # inlines style for emails
 gem 'sidekiq' # background workers
