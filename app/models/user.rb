@@ -88,7 +88,7 @@ class User < ApplicationRecord
   # Get the percent completed in getting tweets classified/sorted
   def tweet_analysis_progress
     max = self.tweets.count
-    count = max - self.tweets.where(queue: nil).count
+    count = max - self.tweets.where(queue: 100000).count
     ((count.to_f / max.to_f) * 100).round(2)
   end
 

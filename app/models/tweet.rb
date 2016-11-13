@@ -1,6 +1,7 @@
 class Tweet < ApplicationRecord
   serialize :giphy_words, Array
   belongs_to :user
+  before_save :assign_gif
 
   # Given Tweet object data from Twitter, return a rails Tweet object.
   def self.normalize(raw_tweet)
@@ -25,14 +26,14 @@ class Tweet < ApplicationRecord
 
   # Assign a GIF.
   def assign_gif
-    if self.giphy_words.blank?
-      img_url = "https://media.giphy.com/media/13bA2eQ0StNCAE/giphy.gif"
-    else
+    if self.giphy_words.any? && self.gif_img_url == "https://media.giphy.com/media/13bA2eQ0StNCAE/giphy.gif"
       search_terms = self.giphy_words.join(' ')
       gif = Giphy.search(search_terms, {limit: 1}).first
-      img_url = gif.original_image.url.to_s
+      img_url = gif.original_image.url.to_s if gif
+    else
+      img_url = "https://media.giphy.com/media/13bA2eQ0StNCAE/giphy.gif"
     end
-    self.update_attribute(:gif_img_url, img_url)
+    self.gif_img_url = img_url
   end
 
   def embed_html

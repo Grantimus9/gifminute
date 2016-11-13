@@ -4,15 +4,20 @@
 
 <div class="col-md-12 text-md-center">
   <% if current_user %>
+    <%= image_tag("https://media.giphy.com/media/13bA2eQ0StNCAE/giphy.gif", size:"200x200") %> <br> <br>
     <div id="user_onboard_progress_div">
       <%= render partial: "users/user_onboard_progress", locals: { series: @series } %>
     </div>
-
-    <%= image_tag("https://media.giphy.com/media/13bA2eQ0StNCAE/giphy.gif") %> <br> <br>
-
-
-    <%= link_to "GO!", "#" %>
+    <br>
+    <br>
+    <%= link_to "Start", tweets_path, class:'btn btn-primary' %>
   <% else %>
-    <%= link_to 'Step 1: Sign in With Twitter', '/auth/twitter' %>
+    <%= link_to 'COME IN VIA TWITTER', '/auth/twitter' %><br>
+    <%= image_tag("https://media.giphy.com/media/yAOjunY81Trjy/giphy.gif") %><br>
+    <%= image_tag("https://media.giphy.com/media/10MQMEHi0t5UuQ/giphy.gif") %><br>
   <% end %>
+</div>
+
+<div class="col-md-12 text-md-center">
+  Demo Cheat Codes: rake demo_seed rake demo_reset rake demo_reset_hard
 </div>

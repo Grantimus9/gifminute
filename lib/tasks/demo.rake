@@ -166,7 +166,17 @@ task :demo_reset => :environment do
 end
 
 desc "HARD Resets Hackital Demo"
-task :demo_reset => :environment do
+task :demo_reset_hard => :environment do
   User.delete_all
   Tweet.delete_all
+end
+
+
+desc "Sets random giphy words from each tweet Hackital Demo"
+task :demo_set_giphy_words => :environment do
+  Tweet.find_each do |tweet|
+    tweet.giphy_words << tweet.text.split.sample
+    tweet.assign_gif
+    tweet.save!
+  end
 end

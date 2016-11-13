@@ -2,7 +2,7 @@
   <h1>Tweet</h1>
 </div>
 <div class="text-md-center">
-  <%= image_tag(@tweet.gif_img_url, height: '320') %>
+  <%= image_tag(@tweet.gif_img_url, size:'250x250') %>
 </div>
 <div class="text-md-center">
   <%= @tweet.giphy_words.to_s %>
@@ -11,7 +11,11 @@
   <%= @tweet.embed_html.html_safe %>
 </div>
 <div class="text-md-center">
-  <%= link_to "Again!", tweets_path %>
+  <%= link_to "Another One!", tweets_path, class:'btn btn-lg btn-primary' %> <br>
+  <%= image_tag("https://media.giphy.com/media/3o6Ztl1QaxgcDdSG4w/giphy.gif") %>
+</div>
+<div class="text-md-center">
+  <%= image_tag('giphy_attribution.png', height: '320') %>
 </div>
 
 <% if Rails.env.development? %>
