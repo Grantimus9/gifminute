@@ -1,2 +1,6 @@
 <h1>GIF Minute</h1>
 <%= link_to 'Step 1: Sign in With Twitter', '/auth/twitter' %>
+
+<% if current_user %>
+  <%= image_tag("http://media1.giphy.com/media/Z1kpfgtHmpWHS/giphy.gif") %>
+<% end %>

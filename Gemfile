@@ -29,7 +29,7 @@ gem 'httparty' # MAKES HTTP FUN AGAIN
 # gem 'filterrific' # for filtering/searching books available.
 gem 'will_paginate' # for paginating across multiple pages.
 gem 'rack-timeout' # kills requests that last too long - see config/initializers/timeout.rb
-
+gem 'giphy' # GIFS ARE THE BEST
 
 group :development do
   # gem 'spring'

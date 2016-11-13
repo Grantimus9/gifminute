@@ -22,9 +22,16 @@ class Tweet < ApplicationRecord
 
   end
 
-  #
+  # Assign a GIF.
   def assign_gif
-
+    if self.giphy_words.blank?
+      img_url = "https://media.giphy.com/media/13bA2eQ0StNCAE/giphy.gif"
+    else
+      search_terms = self.giphy_words.join(' ')
+      gif = Giphy.search(search_terms, {limit: 1}).first
+      img_url = gif.original_image.url.to_s
+    end
+    self.update_attribute(:gif_img_url, img_url)
   end
 
 
