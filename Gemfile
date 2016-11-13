@@ -18,6 +18,7 @@ gem 'bootstrap', '~> 4.0.0.alpha3.1'
 gem 'jbuilder', '~> 2.0' # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'omniauth', '~> 1.0'
 gem 'omniauth-twitter'
+gem 'twitter', '~> 5.0' # Twitter Client.
 gem 'figaro' # puts env variables in config/application.yml
 gem 'roadie-rails' # inlines style for emails
 gem 'sidekiq' # background workers
@@ -28,9 +29,7 @@ gem 'httparty' # MAKES HTTP FUN AGAIN
 # gem 'filterrific' # for filtering/searching books available.
 gem 'will_paginate' # for paginating across multiple pages.
 gem 'rack-timeout' # kills requests that last too long - see config/initializers/timeout.rb
-gem 'griddler' # handles incoming mail from Sendgrid.
-gem 'griddler-sendgrid'
-gem 'wicked' # For step-by-step forms
+
 
 group :development do
   # gem 'spring'

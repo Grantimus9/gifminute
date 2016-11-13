@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   # /auth/google_oauth2 to send user to auth with google
   get '/logout', to: 'sessions#destroy'
 
-  mount_griddler('/incoming/r8hrg8as9j') # The endpoint Sendgrid sends POST data to. Relatively random.
+  # post '/incoming/'
 end
