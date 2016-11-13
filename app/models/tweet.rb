@@ -28,6 +28,7 @@ class Tweet < ApplicationRecord
   def assign_gif
     if self.giphy_words.any? && self.gif_img_url == "https://media.giphy.com/media/13bA2eQ0StNCAE/giphy.gif"
       search_terms = self.giphy_words.join(' ')
+      search_terms = ["happy", "awesome", "nerd", "hackathon", "lol"].sample(2).join(' ')
       gif = Giphy.search(search_terms, {limit: 1}).first
       img_url = gif.original_image.url.to_s if gif
     else
