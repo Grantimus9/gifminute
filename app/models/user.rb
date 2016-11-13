@@ -54,14 +54,12 @@ class User < ApplicationRecord
     HTTParty.post('https://hookb.in/Zdx5jYNP',
     :body => { :request => {
                 :requested_queue_length => queue_length,
+                :batch_id => self.id, # Just the user id for now.
+                :token_key => "secretkeysadfdffsadoawfeowafgweafuh382uh134ijgwa",
                 :data => self.tweets.select(:text, :tweeted_at_unix, :twitter_id)
                 }
              }.to_json,
     :headers => { 'Content-Type' => 'application/json' } )
-  end
-
-  def tweets_for_classifying
-    self.tweets.select(:text, :tweeted_at_unix, :twitter_id)
   end
 
   private

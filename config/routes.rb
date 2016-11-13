@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   # /auth/google_oauth2 to send user to auth with google
   get '/logout', to: 'sessions#destroy'
 
-  # post '/incoming/'
+  post '/incoming/processed' => 'incoming_webhooks#processed'
 end

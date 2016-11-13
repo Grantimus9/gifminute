@@ -13,7 +13,19 @@ class Tweet < ApplicationRecord
     tweet
   end
 
+  # data is the JSON of the response we get from our ML API.
+  # This method is called by a bg worker to process it.
+  # It will need to:
+  # 1. use the batch_id param to link it to the correct user.
+  # 2. get a GIF from GIPHY using the giphy_words array.
+  def self.process_sorted_tweets(data)
 
+  end
+
+  #
+  def assign_gif
+
+  end
 
 
 
