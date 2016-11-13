@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'tweets/index'
+
+  get 'tweets/show'
+
   root 'staticpages#index'
 
   resources :users, only: [:show] do
@@ -8,6 +12,10 @@ Rails.application.routes.draw do
     end
     collection do
     end
+  end
+
+  resources :tweets, only: [:show, :index] do
+
   end
 
   # Authentication

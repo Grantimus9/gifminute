@@ -12,6 +12,5 @@ class UsersController < ApplicationController
       { :name => "Tweet Analysis Progress", :value => user.tweet_analysis_progress},
       { :name => "Tweet GIF-ification Progress", :value => user.tweet_gif_progress}
     ]
-    render :js
   end
 end
