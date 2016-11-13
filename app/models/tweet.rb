@@ -18,6 +18,7 @@ class Tweet < ApplicationRecord
   # It will need to:
   # 1. use the batch_id param to link it to the correct user.
   # 2. get a GIF from GIPHY using the giphy_words array.
+  # 3. call @user.add_gifs_to_tweets to hit the GIPHY API.
   def self.process_sorted_tweets(data)
 
   end

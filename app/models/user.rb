@@ -62,6 +62,13 @@ class User < ApplicationRecord
     :headers => { 'Content-Type' => 'application/json' } )
   end
 
+  # Get GIFs for each Tweet for this user.
+  def add_gifs_to_tweets
+    self.tweets.each do |tweet|
+      tweet.assign_gif unless tweet.seen
+    end
+  end
+
   private
     def collect_with_max_id(collection=[], max_id=nil, &block)
       response = yield(max_id)
