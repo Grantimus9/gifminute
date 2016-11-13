@@ -21,8 +21,8 @@ ActiveRecord::Schema.define(version: 20161112195746) do
     t.datetime "tweeted_at"
     t.integer  "tweeted_at_unix"
     t.string   "twitter_id"
-    t.string   "giphy_words"
-    t.integer  "queue"
+    t.text     "giphy_words"
+    t.integer  "queue",           default: 100000
     t.boolean  "seen",            default: false
     t.string   "gif_img_url",     default: "https://media.giphy.com/media/13bA2eQ0StNCAE/giphy.gif"
     t.integer  "user_id"

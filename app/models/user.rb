@@ -99,6 +99,20 @@ class User < ApplicationRecord
     ((count.to_f / max.to_f) * 100).round(2)
   end
 
+  # Get the next Tweet to show the user.
+  # Tweet hasn't been seen yet.
+  # Tweet in order of queue.
+  # Tweet has a gif to show that's not the default gif.
+  def next_tweet(sentiment: "positive")
+    if sentiment == "positive"
+      tweet = self.tweets.where(seen: false, retweet: false).order(queue: :asc).first
+    else
+      tweet = self.tweets.where(seen: false, retweet: false).order(queue: :desc).first
+    end
+    tweet.update_attribute(:seen, true)
+    tweet
+  end
+
   private
     def collect_with_max_id(collection=[], max_id=nil, &block)
       response = yield(max_id)

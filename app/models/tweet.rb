@@ -1,5 +1,5 @@
 class Tweet < ApplicationRecord
-
+  serialize :giphy_words, Array
   belongs_to :user
 
   # Given Tweet object data from Twitter, return a rails Tweet object.
@@ -33,6 +33,12 @@ class Tweet < ApplicationRecord
       img_url = gif.original_image.url.to_s
     end
     self.update_attribute(:gif_img_url, img_url)
+  end
+
+  def embed_html
+    response = HTTParty.get("https://api.twitter.com/1.1/statuses/oembed.json?id=#{self.twitter_id}&hide_thread=true&align=center")
+    response = JSON.parse(response.body)
+    response["html"]
   end
 
 

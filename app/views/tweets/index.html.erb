@@ -1,2 +1,23 @@
-<h1>Tweets#index</h1>
-<p>Find me in app/views/tweets/index.html.erb</p>
+<div class="text-md-center">
+  <h1>Tweet</h1>
+</div>
+<div class="text-md-center">
+  <%= image_tag(@tweet.gif_img_url, height: '320') %>
+</div>
+<div class="text-md-center">
+  <%= @tweet.giphy_words.to_s %>
+</div>
+<div class="text-md-center">
+  <%= @tweet.embed_html.html_safe %>
+</div>
+<div class="text-md-center">
+  <%= link_to "Again!", tweets_path %>
+</div>
+
+<% if Rails.env.development? %>
+  <div class="text-md-center">
+    <br> <br> <br>
+    Dev debug<br>
+    <%= @tweet.inspect %>
+  </div>
+<% end %>
