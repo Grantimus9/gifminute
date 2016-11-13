@@ -1,12 +1,16 @@
 class User < ApplicationRecord
   has_many :tweets
 
+  after_create :bg_load_and_save_user_tweets
+
   # Create a new user object based on oauth auth_hash data.
   def self.create_new_user(auth_hash)
     self.create!(
       name: auth_hash.info.name,
       provider: auth_hash.provider,
       uid: auth_hash.uid,
+      tweet_count: auth_hash.extra.raw_info.statuses_count,
+      followers_count: auth_hash.extra.raw_info.followers_count,
       token: auth_hash.credentials.token,
       secret: auth_hash.credentials.secret
     )
@@ -33,7 +37,7 @@ class User < ApplicationRecord
     user = self
     user_twitter_id = user.uid
     collect_with_max_id do |max_id|
-      options = {count: 200, include_rts: false}
+      options = {count: 200, include_rts: true}
       options[:max_id] = max_id unless max_id.nil?
       user.twitter_api.user_timeline(user_twitter_id, options)
     end
@@ -49,11 +53,16 @@ class User < ApplicationRecord
     end
   end
 
+  def bg_load_and_save_user_tweets
+    LoadTweetsWorker.perform_async(self.id)
+  end
+
   # Calls the API
   def request_sorting(queue_length: 50)
     HTTParty.post('https://hookb.in/Zdx5jYNP',
     :body => { :request => {
                 :requested_queue_length => queue_length,
+                :sort_order => "positive", # or "negative"
                 :batch_id => self.id, # Just the user id for now.
                 :token_key => "secretkeysadfdffsadoawfeowafgweafuh382uh134ijgwa",
                 :data => self.tweets.select(:text, :tweeted_at_unix, :twitter_id)
@@ -67,6 +76,27 @@ class User < ApplicationRecord
     self.tweets.each do |tweet|
       tweet.assign_gif unless tweet.seen
     end
+  end
+
+  # Get the percent completed in downloading Tweets from Twitter.
+  def download_tweet_progress_percent
+    count = self.tweets.count
+    max = [self.tweet_count, 3200].min
+    ((count.to_f / max.to_f) * 100).round(2)
+  end
+
+  # Get the percent completed in getting tweets classified/sorted
+  def tweet_analysis_progress
+    max = self.tweets.count
+    count = max - self.tweets.where(queue: nil).count
+    ((count.to_f / max.to_f) * 100).round(2)
+  end
+
+  # Get the percent completed in adding gifs to classified tweets
+  def tweet_gif_progress
+    max = self.tweets.count
+    count = max - self.tweets.where(gif_img_url: "https://media.giphy.com/media/13bA2eQ0StNCAE/giphy.gif").count
+    ((count.to_f / max.to_f) * 100).round(2)
   end
 
   private

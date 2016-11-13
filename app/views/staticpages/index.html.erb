@@ -1,6 +1,18 @@
-<h1>GIF Minute</h1>
-<%= link_to 'Step 1: Sign in With Twitter', '/auth/twitter' %>
+<div class="col-md-12 text-md-center">
+  <h1>GIF Minute</h1>
+</div>
 
-<% if current_user %>
-  <%= image_tag("http://media1.giphy.com/media/Z1kpfgtHmpWHS/giphy.gif") %>
-<% end %>
+<div class="col-md-12 text-md-center">
+  <% if current_user %>
+    <div id="user_onboard_progress_div">
+      <%= render partial: "user_onboard_progress", locals: { series: @series } %>
+    </div>
+
+    <%= image_tag("https://media.giphy.com/media/13bA2eQ0StNCAE/giphy.gif") %> <br> <br>
+
+
+    <%= link_to "GO!", "#" %>
+  <% else %>
+    <%= link_to 'Step 1: Sign in With Twitter', '/auth/twitter' %>
+  <% end %>
+</div>

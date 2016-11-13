@@ -24,10 +24,10 @@ ActiveRecord::Schema.define(version: 20161112195746) do
     t.string   "giphy_words"
     t.integer  "queue"
     t.boolean  "seen",            default: false
-    t.string   "gif_img_url"
+    t.string   "gif_img_url",     default: "https://media.giphy.com/media/13bA2eQ0StNCAE/giphy.gif"
     t.integer  "user_id"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.datetime "created_at",                                                                         null: false
+    t.datetime "updated_at",                                                                         null: false
     t.index ["user_id"], name: "index_tweets_on_user_id", using: :btree
   end
 
@@ -35,12 +35,13 @@ ActiveRecord::Schema.define(version: 20161112195746) do
     t.string   "name"
     t.string   "provider"
     t.bigint   "uid"
-    t.integer  "follower_count"
+    t.integer  "followers_count"
+    t.integer  "tweet_count"
     t.string   "token"
     t.string   "secret"
     t.datetime "expires_at"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.index ["uid"], name: "index_users_on_uid", using: :btree
   end
 

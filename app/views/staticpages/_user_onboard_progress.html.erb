@@ -1,0 +1,4 @@
+<% @series.each do |series| %>
+  <div class="text-xs-center" id="example-caption-1"><%= series[:name] %> &hellip; <%= series[:value].to_s %>%</div>
+  <progress class="progress progress-striped" value="<%= series[:value].to_s %>" max="100.00"></progress>
+<% end %>

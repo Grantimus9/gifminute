@@ -4,7 +4,8 @@ class Createusers < ActiveRecord::Migration[5.0]
       t.string :name
       t.string :provider
       t.integer :uid, :limit => 8
-      t.integer :follower_count
+      t.integer :followers_count
+      t.integer :tweet_count
       t.string :token
       t.string :secret
       t.datetime :expires_at

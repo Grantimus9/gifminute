@@ -2,7 +2,12 @@ Rails.application.routes.draw do
 
   root 'staticpages#index'
 
-  resource :users, only: [:show] do
+  resources :users, only: [:show] do
+    member do
+      get :onboard_progress_update
+    end
+    collection do
+    end
   end
 
   # Authentication
